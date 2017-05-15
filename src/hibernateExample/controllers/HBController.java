@@ -35,18 +35,29 @@ public class HBController {
 	
 	@RequestMapping(value="/add" , method= RequestMethod.POST)
 	public ModelAndView LoginSubmission(@ModelAttribute("emp") Employee emp , @RequestParam String action){
-		
+		String msg = null;
+		Employee empObj = null ;
 		List<Employee> empList;
 		ModelAndView mav = new ModelAndView("Welcome");
 		switch (action.toLowerCase()) {
 		case "add":
 			empService.addEmployee(emp);
+			msg = emp.getLastName() + " has been added";
 			break;
 		case "edit":
 			empService.updateEmployee(emp);
+			msg = emp.getLastName() + " has been updated";
+			break;
+		case "search":
+			empObj = empService.getEmployee(emp.getEmpId());
+			mav.addObject("eid",  empObj.getEmpId());
+			mav.addObject("fname",  empObj.getFirstName());
+			mav.addObject("lname",  empObj.getLastName());
+			msg = empObj.getLastName() + " has been searched";
 			break;
 		case "delete":
 			empService.deleteEmployee(emp);
+			msg = emp.getLastName() + " has been deleted";
 			break;
 		
 		default:
@@ -54,7 +65,7 @@ public class HBController {
 		}
 		
 		empList = empService.getAllEmployees();
-		mav.addObject("msg", emp.getLastName() + " has been created.");
+		mav.addObject("msg", msg);
 		mav.addObject("empList",  empList);
 		
 		return mav;

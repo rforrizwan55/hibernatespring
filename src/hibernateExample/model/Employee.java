@@ -16,6 +16,7 @@ public class Employee {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int empId;
 	
+	
 	public int getEmpId() {
 		return empId;
 	}
