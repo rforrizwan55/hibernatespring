@@ -5,7 +5,6 @@
 <hibernate-configuration>
     <session-factory>        
         <property name="hibernate.hbm2ddl.auto">update</property>
-        <mapping class="hibernateExample.model.Employee"/>
-            
+        <mapping class="hibernateExample.model.Employee"/> 
     </session-factory>         
 </hibernate-configuration>
